@@ -35,16 +35,16 @@
             this.labelOptions = new System.Windows.Forms.Label();
             this.labelPrevious = new System.Windows.Forms.Label();
             this.labelOffline = new System.Windows.Forms.Label();
-            this.labelOnline = new System.Windows.Forms.Label();
             this.buttonPrevious = new System.Windows.Forms.Button();
             this.buttonOffline = new System.Windows.Forms.Button();
-            this.buttonOnline = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
             this.labelCountInfo = new System.Windows.Forms.Label();
             this.textBoxCountName = new System.Windows.Forms.TextBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.labelClose = new System.Windows.Forms.Label();
+            this.buttonOnline = new System.Windows.Forms.Button();
+            this.labelOnline = new System.Windows.Forms.Label();
             this.panelMiddle.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -91,7 +91,7 @@
             this.buttonOptions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonOptions.FlatAppearance.BorderSize = 0;
             this.buttonOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOptions.Location = new System.Drawing.Point(11, 150);
+            this.buttonOptions.Location = new System.Drawing.Point(9, 150);
             this.buttonOptions.Margin = new System.Windows.Forms.Padding(0);
             this.buttonOptions.Name = "buttonOptions";
             this.buttonOptions.Size = new System.Drawing.Size(50, 50);
@@ -101,11 +101,10 @@
             // 
             // labelOptions
             // 
-            this.labelOptions.AutoSize = true;
             this.labelOptions.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelOptions.Location = new System.Drawing.Point(63, 163);
+            this.labelOptions.Location = new System.Drawing.Point(62, 150);
             this.labelOptions.Name = "labelOptions";
-            this.labelOptions.Size = new System.Drawing.Size(166, 25);
+            this.labelOptions.Size = new System.Drawing.Size(167, 50);
             this.labelOptions.TabIndex = 5;
             this.labelOptions.Text = "PROGRAM AYAR";
             this.labelOptions.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -113,11 +112,10 @@
             // 
             // labelPrevious
             // 
-            this.labelPrevious.AutoSize = true;
             this.labelPrevious.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPrevious.Location = new System.Drawing.Point(75, 113);
+            this.labelPrevious.Location = new System.Drawing.Point(62, 100);
             this.labelPrevious.Name = "labelPrevious";
-            this.labelPrevious.Size = new System.Drawing.Size(154, 25);
+            this.labelPrevious.Size = new System.Drawing.Size(167, 50);
             this.labelPrevious.TabIndex = 5;
             this.labelPrevious.Text = "ÖNCEKİ SAYIM";
             this.labelPrevious.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -125,27 +123,14 @@
             // 
             // labelOffline
             // 
-            this.labelOffline.AutoSize = true;
             this.labelOffline.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelOffline.Location = new System.Drawing.Point(68, 63);
+            this.labelOffline.Location = new System.Drawing.Point(62, 50);
             this.labelOffline.Name = "labelOffline";
-            this.labelOffline.Size = new System.Drawing.Size(161, 25);
+            this.labelOffline.Size = new System.Drawing.Size(167, 50);
             this.labelOffline.TabIndex = 4;
             this.labelOffline.Text = "OFFLINE SAYIM";
             this.labelOffline.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelOffline.Click += new System.EventHandler(this.labelOffline_Click);
-            // 
-            // labelOnline
-            // 
-            this.labelOnline.AutoSize = true;
-            this.labelOnline.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelOnline.Location = new System.Drawing.Point(76, 13);
-            this.labelOnline.Name = "labelOnline";
-            this.labelOnline.Size = new System.Drawing.Size(153, 25);
-            this.labelOnline.TabIndex = 0;
-            this.labelOnline.Text = "ONLINE SAYIM";
-            this.labelOnline.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelOnline.Click += new System.EventHandler(this.labelOnline_Click);
             // 
             // buttonPrevious
             // 
@@ -155,7 +140,7 @@
             this.buttonPrevious.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonPrevious.FlatAppearance.BorderSize = 0;
             this.buttonPrevious.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPrevious.Location = new System.Drawing.Point(11, 100);
+            this.buttonPrevious.Location = new System.Drawing.Point(9, 100);
             this.buttonPrevious.Margin = new System.Windows.Forms.Padding(0);
             this.buttonPrevious.Name = "buttonPrevious";
             this.buttonPrevious.Size = new System.Drawing.Size(50, 50);
@@ -171,29 +156,13 @@
             this.buttonOffline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonOffline.FlatAppearance.BorderSize = 0;
             this.buttonOffline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOffline.Location = new System.Drawing.Point(11, 50);
+            this.buttonOffline.Location = new System.Drawing.Point(9, 50);
             this.buttonOffline.Margin = new System.Windows.Forms.Padding(0);
             this.buttonOffline.Name = "buttonOffline";
             this.buttonOffline.Size = new System.Drawing.Size(50, 50);
             this.buttonOffline.TabIndex = 2;
             this.buttonOffline.UseVisualStyleBackColor = false;
             this.buttonOffline.Click += new System.EventHandler(this.buttonOffline_Click);
-            // 
-            // buttonOnline
-            // 
-            this.buttonOnline.AutoSize = true;
-            this.buttonOnline.BackColor = System.Drawing.Color.Transparent;
-            this.buttonOnline.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonOnline.BackgroundImage")));
-            this.buttonOnline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonOnline.FlatAppearance.BorderSize = 0;
-            this.buttonOnline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOnline.Location = new System.Drawing.Point(9, 0);
-            this.buttonOnline.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonOnline.Name = "buttonOnline";
-            this.buttonOnline.Size = new System.Drawing.Size(50, 50);
-            this.buttonOnline.TabIndex = 1;
-            this.buttonOnline.UseVisualStyleBackColor = false;
-            this.buttonOnline.Click += new System.EventHandler(this.buttonOnline_Click);
             // 
             // panelTop
             // 
@@ -262,6 +231,33 @@
             this.labelClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelClose.Click += new System.EventHandler(this.labelClose_Click);
             // 
+            // buttonOnline
+            // 
+            this.buttonOnline.AutoSize = true;
+            this.buttonOnline.BackColor = System.Drawing.Color.Transparent;
+            this.buttonOnline.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonOnline.BackgroundImage")));
+            this.buttonOnline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonOnline.FlatAppearance.BorderSize = 0;
+            this.buttonOnline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOnline.Location = new System.Drawing.Point(9, 0);
+            this.buttonOnline.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonOnline.Name = "buttonOnline";
+            this.buttonOnline.Size = new System.Drawing.Size(50, 50);
+            this.buttonOnline.TabIndex = 1;
+            this.buttonOnline.UseVisualStyleBackColor = false;
+            this.buttonOnline.Click += new System.EventHandler(this.buttonOnline_Click);
+            // 
+            // labelOnline
+            // 
+            this.labelOnline.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOnline.Location = new System.Drawing.Point(62, 0);
+            this.labelOnline.Name = "labelOnline";
+            this.labelOnline.Size = new System.Drawing.Size(167, 50);
+            this.labelOnline.TabIndex = 0;
+            this.labelOnline.Text = "ONLINE SAYIM";
+            this.labelOnline.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelOnline.Click += new System.EventHandler(this.labelOnline_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,10 +288,8 @@
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.Label labelOffline;
-        private System.Windows.Forms.Label labelOnline;
         private System.Windows.Forms.Button buttonPrevious;
         private System.Windows.Forms.Button buttonOffline;
-        private System.Windows.Forms.Button buttonOnline;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Label labelPrevious;
         private System.Windows.Forms.Label labelClose;
@@ -303,5 +297,7 @@
         private System.Windows.Forms.Label labelCountInfo;
         private System.Windows.Forms.Button buttonOptions;
         private System.Windows.Forms.Label labelOptions;
+        private System.Windows.Forms.Label labelOnline;
+        private System.Windows.Forms.Button buttonOnline;
     }
 }
