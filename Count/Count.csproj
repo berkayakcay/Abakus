@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9B2E5E3F-C72A-4912-8D58-93787D701DCD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Count</RootNamespace>
+    <AssemblyName>Count</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>barcode.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SQLite.Designer">
+      <HintPath>..\..\..\Resources\sqlite-netFx35-binary-bundle-Win32-2008-1.0.99.0\SQLite.Designer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.99.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Resources\sqlite-netFx35-static-binary-Win32-2008-1.0.99.0\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Count.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dbase.cs" />
+    <Compile Include="Counter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Counter.Designer.cs">
+      <DependentUpon>Counter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Previous.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Previous.Designer.cs">
+      <DependentUpon>Previous.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Transfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Transfer.Designer.cs">
+      <DependentUpon>Transfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WriteTextFile.cs" />
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Counter.resx">
+      <DependentUpon>Counter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Previous.resx">
+      <DependentUpon>Previous.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Transfer.resx">
+      <DependentUpon>Transfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="db\" />
+    <Folder Include="Export\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="barcode.ico" />
+    <Content Include="img\barcode.ico" />
+    <Content Include="img\ic_apps_black_18dp.png" />
+    <Content Include="img\ic_apps_grey600_18dp.png" />
+    <Content Include="img\ic_arrow_back_black_18dp.png" />
+    <Content Include="img\ic_arrow_back_grey600_18dp.png" />
+    <Content Include="img\ic_arrow_drop_down_black_18dp.png" />
+    <Content Include="img\ic_arrow_drop_down_grey600_18dp.png" />
+    <Content Include="img\ic_arrow_drop_up_black_18dp.png" />
+    <Content Include="img\ic_arrow_drop_up_grey600_18dp.png" />
+    <Content Include="img\ic_cancel_black_18dp.png" />
+    <Content Include="img\ic_cancel_grey600_18dp.png" />
+    <Content Include="img\ic_check_black_18dp.png" />
+    <Content Include="img\ic_check_grey600_18dp.png" />
+    <Content Include="img\ic_chevron_left_black_18dp.png" />
+    <Content Include="img\ic_chevron_left_grey600_18dp.png" />
+    <Content Include="img\ic_chevron_right_black_18dp.png" />
+    <Content Include="img\ic_chevron_right_grey600_18dp.png" />
+    <Content Include="img\ic_close_black_18dp.png" />
+    <Content Include="img\ic_close_grey600_18dp.png" />
+    <Content Include="img\ic_expand_less_black_18dp.png" />
+    <Content Include="img\ic_expand_less_grey600_18dp.png" />
+    <Content Include="img\ic_expand_more_black_18dp.png" />
+    <Content Include="img\ic_expand_more_grey600_18dp.png" />
+    <Content Include="img\ic_fullscreen_black_18dp.png" />
+    <Content Include="img\ic_fullscreen_exit_black_18dp.png" />
+    <Content Include="img\ic_fullscreen_exit_grey600_18dp.png" />
+    <Content Include="img\ic_fullscreen_grey600_18dp.png" />
+    <Content Include="img\ic_menu_black_18dp.png" />
+    <Content Include="img\ic_menu_grey600_18dp.png" />
+    <Content Include="img\ic_more_horiz_black_18dp.png" />
+    <Content Include="img\ic_more_horiz_grey600_18dp.png" />
+    <Content Include="img\ic_more_vert_black_18dp.png" />
+    <Content Include="img\ic_more_vert_grey600_18dp.png" />
+    <Content Include="img\ic_refresh_black_18dp.png" />
+    <Content Include="img\ic_refresh_grey600_18dp.png" />
+    <Content Include="img\ic_settings_black_18dp.png" />
+    <Content Include="img\ic_settings_grey600_18dp.png" />
+    <Content Include="img\ic_swap_vert_black_18dp.png" />
+    <Content Include="img\ic_swap_vert_grey600_18dp.png" />
+    <Content Include="img\ic_swap_vert_white_18dp.png" />
+    <Content Include="img\ic_unfold_less_black_18dp.png" />
+    <Content Include="img\ic_unfold_less_grey600_18dp.png" />
+    <Content Include="img\ic_unfold_more_black_18dp.png" />
+    <Content Include="img\ic_unfold_more_grey600_18dp.png" />
+    <Content Include="img\ic_visibility_black_18dp.png" />
+    <Content Include="img\ic_visibility_grey600_24dp.png" />
+    <Content Include="img\ic_visibility_off_black_18dp.png" />
+    <Content Include="img\ic_visibility_off_grey600_18dp.png" />
+    <Content Include="x86\SQLite.Interop.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
