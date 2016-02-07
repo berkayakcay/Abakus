@@ -130,6 +130,7 @@
     <EmbeddedResource Include="Transfer.resx">
       <DependentUpon>Transfer.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="db\main.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -143,12 +144,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="db\" />
-    <Folder Include="Export\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="barcode.ico" />
+    <Content Include="Export\a.txt" />
+    <Content Include="Export\aaa.txt" />
     <Content Include="img\barcode.ico" />
     <Content Include="img\ic_apps_black_18dp.png" />
     <Content Include="img\ic_apps_grey600_18dp.png" />
