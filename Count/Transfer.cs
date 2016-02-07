@@ -18,8 +18,11 @@ namespace Count
             InitializeComponent();
         }
 
+        #region Functions   ---   All functions inside
+
         private void Transfer_Load(object sender, EventArgs e)
         {
+            checkBoxSpecialChar.Checked = false;
             PreviousCounts();
 
             if (System.IO.File.Exists(@"Settings.txt"))
@@ -35,10 +38,14 @@ namespace Count
                 }
                 catch (Exception)
                 {
-                   labelOnlineInfo.Text = "Ayar dosyası bozuk!";
+                    labelOnlineInfo.Text = "Ayar dosyasından bilgiler alınamadı! \n Aktarımdan önce ayar dosyasını düzenleyin.";
                 }
             }
-        }
+            else
+            {
+                labelOnlineInfo.Text = "Ayar dosyasından bilgiler alınamadı! \n Ayar dosyası mevcut değil. Öncelikte ayar dosyası oluşturun.";
+            }
+        }   // Onload
 
         public void PreviousCounts()
         {
@@ -50,13 +57,22 @@ namespace Count
             {
                 comboBoxCounts.Items.Add(dbase.slDataReader[0]);
             }
-
             dbase.CloseslConnection();
         }   // Populate Grid
 
         public string FixType()
         {
-            switch (comboBoxCharacter.Text.ToString())
+            string SpecialChar;
+            if (checkBoxSpecialChar.Checked == true)
+            {
+                SpecialChar = textBoxSpecialChar.Text.ToString();
+            }
+            else
+            {
+                SpecialChar = checkBoxSpecialChar.Text.ToString();
+            }
+
+            switch (SpecialChar)
             {
                 case "TAB":
                     return "\t";
@@ -67,11 +83,13 @@ namespace Count
                 case "SEMICOL":
                     return ";";
                 default:
-                    return "\t";
+                    return SpecialChar;
             }
-        }
+        }   // Fix types string
+
         public void OfflineTransfer()
         {
+            
             dbase.OpenslConnection();
             dbase.slQueryText = "SELECT Barcode, Qty FROM prCount WHERE CountName = '" + comboBoxCounts.Text.ToString() + "'";
             dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
@@ -86,7 +104,7 @@ namespace Count
             dbase.CloseslConnection();
             WriteTextFile.RW(TransferList, comboBoxCounts.Text.ToString());
             MessageBox.Show(comboBoxCounts.Text.ToString() + " isimli dosya aktarıldı.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+        }   // Offline transfer operations
 
         public void OnlineTransfer()
         {
@@ -97,11 +115,11 @@ namespace Count
             dbase.slDataReader = dbase.slCommand.ExecuteReader();
 
             dbase.OpenmsConnection();
-            
+
             dbase.msQueryText = "SELECT Barcode,ItemCode,ColorCode,ItemDim1Code,ItemDim2Code,ItemDim3Code FROM prItemBarcode WHERE Barcode = @Barcode";
             dbase.msCommand = new SqlCommand(dbase.msQueryText, dbase.msConnection);
             dbase.msCommand.Parameters.Add("@Barcode", SqlDbType.VarChar);
-            
+
 
             while (dbase.slDataReader.Read())
             {
@@ -151,46 +169,84 @@ namespace Count
                         "Source: " + ex.Errors[i].Source + "\n" +
                         "Procedure: " + ex.Errors[i].Procedure + "\n");
                 }
-                MessageBox.Show(errorMessages.ToString(),"Hata",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(errorMessages.ToString(), "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
-        }
+        }   // Online transfer operations
 
+        #endregion
+
+
+
+        #region Form Elements   ---   All form elements inside
 
         private void buttonTransfer_Click(object sender, EventArgs e)
         {
             if (comboBoxCounts.Text == "")
             {
-                MessageBox.Show("Sayım adı seçiniz","Dikkat",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Sayım adı seçiniz", "Dikkat", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                if (tabControlTransfer.SelectedTab.Text == "OFFLINE")
+                if (tabControlTransfer.SelectedTab.Text == "OFFLINE" )
                 {
-                    if (comboBoxCharacter.Text == "")
+                    if (checkBoxSpecialChar.Checked)
                     {
-                        MessageBox.Show("Ayırıcı karakter seçiniz", "Dikkat", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (textBoxSpecialChar.Text == "")
+                        {
+                            MessageBox.Show("Ayırıcı karakter seçiniz", "Dikkat", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            OfflineTransfer();
+                        }
                     }
                     else
                     {
-                        OfflineTransfer();
+                        if (comboBoxCharacter.Text == "")
+                        {
+                            MessageBox.Show("Ayırıcı karakter seçiniz", "Dikkat", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            OfflineTransfer();
+                        }
                     }
-                    
                 }
                 else
                 {
                     OnlineTransfer();
                 }
             }
-
-        }
+        }   // Checks before transfer methods
 
         private void ButtonBackToMain_Click(object sender, EventArgs e)
         {
             Previous frm = new Previous();
             this.Hide();
             frm.Show();
+        }   // return to Main
+
+        #endregion
+
+
+
+
+
+
+        private void checkBoxSpecialChar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxSpecialChar.Checked == true)
+            {
+                textBoxSpecialChar.Enabled = true;
+                comboBoxCharacter.Enabled = false;
+            }
+            else
+            {
+                textBoxSpecialChar.Enabled = false;
+                comboBoxCharacter.Enabled = true;
+            }
         }
     }
 }

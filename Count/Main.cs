@@ -17,13 +17,14 @@ namespace Count
             InitializeComponent();
         }
 
-        #region Functions
+        #region Functions   ---   All functions inside
+
         private void ApplicationClose()
         {
             Environment.Exit(0);
         }   //Close this application
 
-        public void AddNewCount(bool status)
+        private void AddNewCount(bool status)
         {
             try
             {
@@ -92,28 +93,21 @@ namespace Count
                 else
                 {
                     AddNewCount(status);
-                }          
+                }
             }
 
         }   //Create New Counter
+
         #endregion
 
 
-        #region Form Elements
+        #region Form Elements   ---    All form elements inside
 
-        private void labelOnline_Click(object sender, EventArgs e)
-        {
-            OpenCounter(true);
-        }
         private void buttonOnline_Click(object sender, EventArgs e)
         {
             OpenCounter(true);
         }
         private void buttonOffline_Click(object sender, EventArgs e)
-        {
-            OpenCounter(false);
-        }
-        private void labelOffline_Click(object sender, EventArgs e)
         {
             OpenCounter(false);
         }
@@ -123,27 +117,19 @@ namespace Count
             this.Hide();
             frm.Show();
         }
-        private void labelPrevious_Click(object sender, EventArgs e)
-        {
-            Previous frm = new Previous();
-            this.Hide();
-            frm.Show();
-        }
-        private void labelClose_Click(object sender, EventArgs e)
-        {
-            ApplicationClose();
-        }
         private void buttonClose_Click(object sender, EventArgs e)
         {
             ApplicationClose();
         }
-        #endregion
-
         private void buttonOptions_Click(object sender, EventArgs e)
         {
             Settings frm = new Settings();
             this.Hide();
             frm.Show();
         }
+
+        #endregion      
+
+
     }
 }

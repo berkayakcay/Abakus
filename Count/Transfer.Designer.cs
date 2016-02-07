@@ -33,13 +33,11 @@
             this.comboBoxCounts = new System.Windows.Forms.ComboBox();
             this.tabControlTransfer = new System.Windows.Forms.TabControl();
             this.tabPageOfline = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.ButtonBackToMain = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelPathInfo = new System.Windows.Forms.Label();
-            this.buttonTransfer = new System.Windows.Forms.Button();
             this.comboBoxCharacter = new System.Windows.Forms.ComboBox();
+            this.labelPathInfo = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.labelOnlineInfo = new System.Windows.Forms.Label();
             this.comboBoxProgram = new System.Windows.Forms.ComboBox();
             this.labelProgram = new System.Windows.Forms.Label();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
@@ -50,7 +48,11 @@
             this.labelDataBase = new System.Windows.Forms.Label();
             this.textBoxServer = new System.Windows.Forms.TextBox();
             this.labelServer = new System.Windows.Forms.Label();
-            this.labelOnlineInfo = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonTransfer = new System.Windows.Forms.Button();
+            this.ButtonBackToMain = new System.Windows.Forms.Button();
+            this.checkBoxSpecialChar = new System.Windows.Forms.CheckBox();
+            this.textBoxSpecialChar = new System.Windows.Forms.TextBox();
             this.tabControlTransfer.SuspendLayout();
             this.tabPageOfline.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -94,6 +96,8 @@
             // 
             // tabPageOfline
             // 
+            this.tabPageOfline.Controls.Add(this.textBoxSpecialChar);
+            this.tabPageOfline.Controls.Add(this.checkBoxSpecialChar);
             this.tabPageOfline.Controls.Add(this.comboBoxCharacter);
             this.tabPageOfline.Controls.Add(this.labelPathInfo);
             this.tabPageOfline.Controls.Add(this.label1);
@@ -104,6 +108,38 @@
             this.tabPageOfline.TabIndex = 0;
             this.tabPageOfline.Text = "OFFLINE";
             this.tabPageOfline.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxCharacter
+            // 
+            this.comboBoxCharacter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCharacter.FormattingEnabled = true;
+            this.comboBoxCharacter.Items.AddRange(new object[] {
+            "TAB",
+            "SPACE",
+            "COMMA",
+            "SEMICOL"});
+            this.comboBoxCharacter.Location = new System.Drawing.Point(136, 12);
+            this.comboBoxCharacter.Name = "comboBoxCharacter";
+            this.comboBoxCharacter.Size = new System.Drawing.Size(88, 21);
+            this.comboBoxCharacter.TabIndex = 3;
+            // 
+            // labelPathInfo
+            // 
+            this.labelPathInfo.AutoSize = true;
+            this.labelPathInfo.Location = new System.Drawing.Point(20, 177);
+            this.labelPathInfo.Name = "labelPathInfo";
+            this.labelPathInfo.Size = new System.Drawing.Size(194, 13);
+            this.labelPathInfo.TabIndex = 2;
+            this.labelPathInfo.Text = "Dosyalarınız Export Klasörüne Kaydedilir";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(127, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Barkod ve Miktar Ayırıcı : ";
             // 
             // tabPage2
             // 
@@ -126,71 +162,13 @@
             this.tabPage2.Text = "ONLINE";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // labelOnlineInfo
             // 
-            this.panel1.Controls.Add(this.buttonTransfer);
-            this.panel1.Controls.Add(this.ButtonBackToMain);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 260);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(240, 60);
-            this.panel1.TabIndex = 7;
-            // 
-            // ButtonBackToMain
-            // 
-            this.ButtonBackToMain.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.ButtonBackToMain.Image = ((System.Drawing.Image)(resources.GetObject("ButtonBackToMain.Image")));
-            this.ButtonBackToMain.Location = new System.Drawing.Point(0, 0);
-            this.ButtonBackToMain.Name = "ButtonBackToMain";
-            this.ButtonBackToMain.Size = new System.Drawing.Size(60, 60);
-            this.ButtonBackToMain.TabIndex = 1;
-            this.ButtonBackToMain.UseVisualStyleBackColor = true;
-            this.ButtonBackToMain.Click += new System.EventHandler(this.ButtonBackToMain_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Barkod ve Miktar Ayırıcı : ";
-            // 
-            // labelPathInfo
-            // 
-            this.labelPathInfo.AutoSize = true;
-            this.labelPathInfo.Location = new System.Drawing.Point(20, 177);
-            this.labelPathInfo.Name = "labelPathInfo";
-            this.labelPathInfo.Size = new System.Drawing.Size(194, 13);
-            this.labelPathInfo.TabIndex = 2;
-            this.labelPathInfo.Text = "Dosyalarınız Export Klasörüne Kaydedilir";
-            // 
-            // buttonTransfer
-            // 
-            this.buttonTransfer.BackColor = System.Drawing.Color.Lime;
-            this.buttonTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonTransfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTransfer.Location = new System.Drawing.Point(59, 0);
-            this.buttonTransfer.Name = "buttonTransfer";
-            this.buttonTransfer.Size = new System.Drawing.Size(177, 60);
-            this.buttonTransfer.TabIndex = 2;
-            this.buttonTransfer.Text = "AKTAR";
-            this.buttonTransfer.UseVisualStyleBackColor = false;
-            this.buttonTransfer.Click += new System.EventHandler(this.buttonTransfer_Click);
-            // 
-            // comboBoxCharacter
-            // 
-            this.comboBoxCharacter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCharacter.FormattingEnabled = true;
-            this.comboBoxCharacter.Items.AddRange(new object[] {
-            "TAB",
-            "SPACE",
-            "COMMA",
-            "SEMICOL"});
-            this.comboBoxCharacter.Location = new System.Drawing.Point(136, 12);
-            this.comboBoxCharacter.Name = "comboBoxCharacter";
-            this.comboBoxCharacter.Size = new System.Drawing.Size(88, 21);
-            this.comboBoxCharacter.TabIndex = 3;
+            this.labelOnlineInfo.AutoSize = true;
+            this.labelOnlineInfo.Location = new System.Drawing.Point(9, 151);
+            this.labelOnlineInfo.Name = "labelOnlineInfo";
+            this.labelOnlineInfo.Size = new System.Drawing.Size(0, 13);
+            this.labelOnlineInfo.TabIndex = 13;
             // 
             // comboBoxProgram
             // 
@@ -286,13 +264,59 @@
             this.labelServer.TabIndex = 7;
             this.labelServer.Text = "Sunucu : ";
             // 
-            // labelOnlineInfo
+            // panel1
             // 
-            this.labelOnlineInfo.AutoSize = true;
-            this.labelOnlineInfo.Location = new System.Drawing.Point(9, 151);
-            this.labelOnlineInfo.Name = "labelOnlineInfo";
-            this.labelOnlineInfo.Size = new System.Drawing.Size(0, 13);
-            this.labelOnlineInfo.TabIndex = 13;
+            this.panel1.Controls.Add(this.buttonTransfer);
+            this.panel1.Controls.Add(this.ButtonBackToMain);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 260);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(240, 60);
+            this.panel1.TabIndex = 7;
+            // 
+            // buttonTransfer
+            // 
+            this.buttonTransfer.BackColor = System.Drawing.Color.Lime;
+            this.buttonTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonTransfer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTransfer.Location = new System.Drawing.Point(59, 0);
+            this.buttonTransfer.Name = "buttonTransfer";
+            this.buttonTransfer.Size = new System.Drawing.Size(177, 60);
+            this.buttonTransfer.TabIndex = 2;
+            this.buttonTransfer.Text = "AKTAR";
+            this.buttonTransfer.UseVisualStyleBackColor = false;
+            this.buttonTransfer.Click += new System.EventHandler(this.buttonTransfer_Click);
+            // 
+            // ButtonBackToMain
+            // 
+            this.ButtonBackToMain.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.ButtonBackToMain.Image = ((System.Drawing.Image)(resources.GetObject("ButtonBackToMain.Image")));
+            this.ButtonBackToMain.Location = new System.Drawing.Point(0, 0);
+            this.ButtonBackToMain.Name = "ButtonBackToMain";
+            this.ButtonBackToMain.Size = new System.Drawing.Size(60, 60);
+            this.ButtonBackToMain.TabIndex = 1;
+            this.ButtonBackToMain.UseVisualStyleBackColor = true;
+            this.ButtonBackToMain.Click += new System.EventHandler(this.ButtonBackToMain_Click);
+            // 
+            // checkBoxSpecialChar
+            // 
+            this.checkBoxSpecialChar.AutoSize = true;
+            this.checkBoxSpecialChar.Location = new System.Drawing.Point(9, 54);
+            this.checkBoxSpecialChar.Name = "checkBoxSpecialChar";
+            this.checkBoxSpecialChar.Size = new System.Drawing.Size(129, 17);
+            this.checkBoxSpecialChar.TabIndex = 4;
+            this.checkBoxSpecialChar.Text = "Özel karakter kullan : ";
+            this.checkBoxSpecialChar.UseVisualStyleBackColor = true;
+            this.checkBoxSpecialChar.CheckedChanged += new System.EventHandler(this.checkBoxSpecialChar_CheckedChanged);
+            // 
+            // textBoxSpecialChar
+            // 
+            this.textBoxSpecialChar.Enabled = false;
+            this.textBoxSpecialChar.Location = new System.Drawing.Point(136, 54);
+            this.textBoxSpecialChar.MaxLength = 5;
+            this.textBoxSpecialChar.Name = "textBoxSpecialChar";
+            this.textBoxSpecialChar.Size = new System.Drawing.Size(88, 20);
+            this.textBoxSpecialChar.TabIndex = 5;
             // 
             // Transfer
             // 
@@ -343,5 +367,7 @@
         private System.Windows.Forms.TextBox textBoxServer;
         private System.Windows.Forms.Label labelServer;
         private System.Windows.Forms.Label labelOnlineInfo;
+        private System.Windows.Forms.TextBox textBoxSpecialChar;
+        private System.Windows.Forms.CheckBox checkBoxSpecialChar;
     }
 }

@@ -35,16 +35,16 @@
             this.labelOptions = new System.Windows.Forms.Label();
             this.labelPrevious = new System.Windows.Forms.Label();
             this.labelOffline = new System.Windows.Forms.Label();
+            this.labelOnline = new System.Windows.Forms.Label();
             this.buttonPrevious = new System.Windows.Forms.Button();
             this.buttonOffline = new System.Windows.Forms.Button();
+            this.buttonOnline = new System.Windows.Forms.Button();
             this.panelTop = new System.Windows.Forms.Panel();
             this.labelCountInfo = new System.Windows.Forms.Label();
             this.textBoxCountName = new System.Windows.Forms.TextBox();
             this.labelTitle = new System.Windows.Forms.Label();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.labelClose = new System.Windows.Forms.Label();
-            this.buttonOnline = new System.Windows.Forms.Button();
-            this.labelOnline = new System.Windows.Forms.Label();
             this.panelMiddle.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -119,7 +119,7 @@
             this.labelPrevious.TabIndex = 5;
             this.labelPrevious.Text = "ÖNCEKİ SAYIM";
             this.labelPrevious.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelPrevious.Click += new System.EventHandler(this.labelPrevious_Click);
+            this.labelPrevious.Click += new System.EventHandler(this.buttonPrevious_Click);
             // 
             // labelOffline
             // 
@@ -130,7 +130,18 @@
             this.labelOffline.TabIndex = 4;
             this.labelOffline.Text = "OFFLINE SAYIM";
             this.labelOffline.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelOffline.Click += new System.EventHandler(this.labelOffline_Click);
+            this.labelOffline.Click += new System.EventHandler(this.buttonOffline_Click);
+            // 
+            // labelOnline
+            // 
+            this.labelOnline.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOnline.Location = new System.Drawing.Point(62, 0);
+            this.labelOnline.Name = "labelOnline";
+            this.labelOnline.Size = new System.Drawing.Size(167, 50);
+            this.labelOnline.TabIndex = 0;
+            this.labelOnline.Text = "ONLINE SAYIM";
+            this.labelOnline.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelOnline.Click += new System.EventHandler(this.buttonOnline_Click);
             // 
             // buttonPrevious
             // 
@@ -164,6 +175,22 @@
             this.buttonOffline.UseVisualStyleBackColor = false;
             this.buttonOffline.Click += new System.EventHandler(this.buttonOffline_Click);
             // 
+            // buttonOnline
+            // 
+            this.buttonOnline.AutoSize = true;
+            this.buttonOnline.BackColor = System.Drawing.Color.Transparent;
+            this.buttonOnline.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonOnline.BackgroundImage")));
+            this.buttonOnline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonOnline.FlatAppearance.BorderSize = 0;
+            this.buttonOnline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOnline.Location = new System.Drawing.Point(9, 0);
+            this.buttonOnline.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonOnline.Name = "buttonOnline";
+            this.buttonOnline.Size = new System.Drawing.Size(50, 50);
+            this.buttonOnline.TabIndex = 1;
+            this.buttonOnline.UseVisualStyleBackColor = false;
+            this.buttonOnline.Click += new System.EventHandler(this.buttonOnline_Click);
+            // 
             // panelTop
             // 
             this.panelTop.Controls.Add(this.labelCountInfo);
@@ -180,21 +207,21 @@
             // 
             this.labelCountInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelCountInfo.ForeColor = System.Drawing.Color.Red;
-            this.labelCountInfo.Location = new System.Drawing.Point(0, 45);
+            this.labelCountInfo.Location = new System.Drawing.Point(0, 43);
             this.labelCountInfo.Name = "labelCountInfo";
-            this.labelCountInfo.Size = new System.Drawing.Size(240, 12);
+            this.labelCountInfo.Size = new System.Drawing.Size(240, 18);
             this.labelCountInfo.TabIndex = 2;
             // 
             // textBoxCountName
             // 
             this.textBoxCountName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxCountName.Dock = System.Windows.Forms.DockStyle.Top;
-            this.textBoxCountName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCountName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxCountName.ImeMode = System.Windows.Forms.ImeMode.Alpha;
-            this.textBoxCountName.Location = new System.Drawing.Point(0, 24);
+            this.textBoxCountName.Location = new System.Drawing.Point(0, 21);
             this.textBoxCountName.MaxLength = 50;
             this.textBoxCountName.Name = "textBoxCountName";
-            this.textBoxCountName.Size = new System.Drawing.Size(240, 21);
+            this.textBoxCountName.Size = new System.Drawing.Size(240, 22);
             this.textBoxCountName.TabIndex = 1;
             // 
             // labelTitle
@@ -203,7 +230,7 @@
             this.labelTitle.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.Location = new System.Drawing.Point(0, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(240, 24);
+            this.labelTitle.Size = new System.Drawing.Size(240, 21);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "ON/OFF SAYIM";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -228,34 +255,7 @@
             this.labelClose.TabIndex = 6;
             this.labelClose.Text = "PROGRAMI KAPAT";
             this.labelClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelClose.Click += new System.EventHandler(this.labelClose_Click);
-            // 
-            // buttonOnline
-            // 
-            this.buttonOnline.AutoSize = true;
-            this.buttonOnline.BackColor = System.Drawing.Color.Transparent;
-            this.buttonOnline.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonOnline.BackgroundImage")));
-            this.buttonOnline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonOnline.FlatAppearance.BorderSize = 0;
-            this.buttonOnline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOnline.Location = new System.Drawing.Point(9, 0);
-            this.buttonOnline.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonOnline.Name = "buttonOnline";
-            this.buttonOnline.Size = new System.Drawing.Size(50, 50);
-            this.buttonOnline.TabIndex = 1;
-            this.buttonOnline.UseVisualStyleBackColor = false;
-            this.buttonOnline.Click += new System.EventHandler(this.buttonOnline_Click);
-            // 
-            // labelOnline
-            // 
-            this.labelOnline.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelOnline.Location = new System.Drawing.Point(62, 0);
-            this.labelOnline.Name = "labelOnline";
-            this.labelOnline.Size = new System.Drawing.Size(167, 50);
-            this.labelOnline.TabIndex = 0;
-            this.labelOnline.Text = "ONLINE SAYIM";
-            this.labelOnline.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelOnline.Click += new System.EventHandler(this.labelOnline_Click);
+            this.labelClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // Main
             // 
