@@ -58,10 +58,10 @@
             this.buttonClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.buttonClose.FlatAppearance.BorderSize = 0;
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonClose.Location = new System.Drawing.Point(9, 1);
+            this.buttonClose.Location = new System.Drawing.Point(4, 1);
             this.buttonClose.Margin = new System.Windows.Forms.Padding(0);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(50, 50);
+            this.buttonClose.Size = new System.Drawing.Size(50, 49);
             this.buttonClose.TabIndex = 0;
             this.buttonClose.UseVisualStyleBackColor = false;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
@@ -221,11 +221,10 @@
             // 
             // labelClose
             // 
-            this.labelClose.AutoSize = true;
             this.labelClose.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelClose.Location = new System.Drawing.Point(58, 14);
+            this.labelClose.Location = new System.Drawing.Point(57, 1);
             this.labelClose.Name = "labelClose";
-            this.labelClose.Size = new System.Drawing.Size(171, 24);
+            this.labelClose.Size = new System.Drawing.Size(172, 49);
             this.labelClose.TabIndex = 6;
             this.labelClose.Text = "PROGRAMI KAPAT";
             this.labelClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
