@@ -53,6 +53,8 @@
             this.ButtonBackToMain = new System.Windows.Forms.Button();
             this.checkBoxSpecialChar = new System.Windows.Forms.CheckBox();
             this.textBoxSpecialChar = new System.Windows.Forms.TextBox();
+            this.labelWareHouse = new System.Windows.Forms.Label();
+            this.comboBoxWareHouse = new System.Windows.Forms.ComboBox();
             this.tabControlTransfer.SuspendLayout();
             this.tabPageOfline.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -144,7 +146,9 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.labelOnlineInfo);
+            this.tabPage2.Controls.Add(this.comboBoxWareHouse);
             this.tabPage2.Controls.Add(this.comboBoxProgram);
+            this.tabPage2.Controls.Add(this.labelWareHouse);
             this.tabPage2.Controls.Add(this.labelProgram);
             this.tabPage2.Controls.Add(this.textBoxPassword);
             this.tabPage2.Controls.Add(this.labelPassword);
@@ -318,6 +322,23 @@
             this.textBoxSpecialChar.Size = new System.Drawing.Size(88, 20);
             this.textBoxSpecialChar.TabIndex = 5;
             // 
+            // labelWareHouse
+            // 
+            this.labelWareHouse.AutoSize = true;
+            this.labelWareHouse.Location = new System.Drawing.Point(6, 151);
+            this.labelWareHouse.Name = "labelWareHouse";
+            this.labelWareHouse.Size = new System.Drawing.Size(42, 13);
+            this.labelWareHouse.TabIndex = 3;
+            this.labelWareHouse.Text = "Depo : ";
+            // 
+            // comboBoxWareHouse
+            // 
+            this.comboBoxWareHouse.FormattingEnabled = true;
+            this.comboBoxWareHouse.Location = new System.Drawing.Point(76, 147);
+            this.comboBoxWareHouse.Name = "comboBoxWareHouse";
+            this.comboBoxWareHouse.Size = new System.Drawing.Size(148, 21);
+            this.comboBoxWareHouse.TabIndex = 12;
+            // 
             // Transfer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -369,5 +390,7 @@
         private System.Windows.Forms.Label labelOnlineInfo;
         private System.Windows.Forms.TextBox textBoxSpecialChar;
         private System.Windows.Forms.CheckBox checkBoxSpecialChar;
+        private System.Windows.Forms.ComboBox comboBoxWareHouse;
+        private System.Windows.Forms.Label labelWareHouse;
     }
 }

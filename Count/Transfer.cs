@@ -24,6 +24,7 @@ namespace Count
         {
             checkBoxSpecialChar.Checked = false;
             PreviousCounts();
+            WareHouseCodes();
 
             if (System.IO.File.Exists(@"Settings.txt"))
             {
@@ -60,6 +61,25 @@ namespace Count
             dbase.CloseslConnection();
         }   // Populate Grid
 
+        
+        private void WareHouseCodes()
+        {
+            dbase.OpenmsConnection();
+            dbase.msQueryText = "SELECT WarehouseCode, WarehouseDescription FROM cdWareHouseDesc";
+            dbase.msCommand = new SqlCommand(dbase.msQueryText, dbase.msConnection);
+            dbase.msDataReader = dbase.msCommand.ExecuteReader();
+
+            comboBoxWareHouse.DisplayMember = "Text";
+            comboBoxWareHouse.ValueMember = "Value";
+
+            while (dbase.msDataReader.Read())
+            {
+                comboBoxWareHouse.Items.Add(new { Text = dbase.msDataReader["WarehouseDescription"].ToString(), Value = dbase.msDataReader["WarehouseCode"].ToString() });
+            }
+            dbase.ClosemsConnection();
+
+        }   // Populate WareHouse Codes
+
         public string FixType()
         {
             string SpecialChar;
@@ -89,7 +109,6 @@ namespace Count
 
         public void OfflineTransfer()
         {
-            
             dbase.OpenslConnection();
             dbase.slQueryText = "SELECT Barcode, Qty FROM prCount WHERE CountName = '" + comboBoxCounts.Text.ToString() + "'";
             dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
@@ -130,7 +149,7 @@ namespace Count
                     {
                         SqlConnection cnn = new SqlConnection(dbase.Msconnectionstring.ToString());
                         cnn.Open();
-                        string insert = string.Concat("INSERT INTO [dbo].[xlDepoEnvanteri] ([DepoKodu] ,[Barkod],[UrunKodu],[Renk],[Boyut1],[Boyut2],[Boyut3],[Miktar]) VALUES ('01' , '", dbase.msDataReader["Barcode"].ToString(), "','", dbase.msDataReader["ItemCode"].ToString(), "','", dbase.msDataReader["ColorCode"].ToString(), "','", dbase.msDataReader["ItemDim1Code"].ToString(), "','", dbase.msDataReader["ItemDim2Code"].ToString(), "','", dbase.msDataReader["ItemDim3Code"].ToString(), "','", dbase.slDataReader["Qty"].ToString(), "')");
+                        string insert = string.Concat("INSERT INTO [dbo].[xlDepoEnvanteri] ([DepoKodu] ,[Barkod],[UrunKodu],[Renk],[Boyut1],[Boyut2],[Boyut3],[Miktar]) VALUES ('",comboBoxWareHouse.SelectedValue.ToString(),"' , '", dbase.msDataReader["Barcode"].ToString(), "','", dbase.msDataReader["ItemCode"].ToString(), "','", dbase.msDataReader["ColorCode"].ToString(), "','", dbase.msDataReader["ItemDim1Code"].ToString(), "','", dbase.msDataReader["ItemDim2Code"].ToString(), "','", dbase.msDataReader["ItemDim3Code"].ToString(), "','", dbase.slDataReader["Qty"].ToString(), "')");
                         SqlCommand cmd = new SqlCommand(insert, cnn);
                         cmd.ExecuteNonQuery();
                         cnn.Close();
@@ -216,7 +235,15 @@ namespace Count
                 }
                 else
                 {
-                    OnlineTransfer();
+                    if (comboBoxWareHouse.SelectedIndex > -1)
+                    {
+                        OnlineTransfer();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Depo seçimi yapınız", "Dikkat", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    
                 }
             }
         }   // Checks before transfer methods
