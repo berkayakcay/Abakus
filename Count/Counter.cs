@@ -20,9 +20,7 @@ namespace Count
             InitializeComponent();
             CountDetail = OffCount;
         }
-        #region Functions
-
-        
+        #region Functions   ---   All functions inside
 
         public void AddNewLine(string barcode, int Qty)
         {
@@ -31,61 +29,72 @@ namespace Count
                 try
                 {
                     dbase.OpenmsConnection();
+                    if (dbase.msConnection.State.ToString() == "Open")
+                    {
+                        bool IsExist = false;
+                        dbase.msQueryText = "SELECT * FROM prItemBarcode WHERE Barcode = @Barcode";
+                        dbase.msCommand = new SqlCommand(dbase.msQueryText, dbase.msConnection);
+                        dbase.msCommand.Parameters.Add("@Barcode", SqlDbType.VarChar);
+                        dbase.msCommand.Parameters["@Barcode"].Value = textBoxBarcode.Text.ToString();
+                        dbase.msDataReader = dbase.msCommand.ExecuteReader();
+                        while (dbase.msDataReader.Read())
+                        {
+                            try
+                            {
+                                dbase.OpenslConnection();
+                                dbase.slQueryText = "INSERT INTO prCount (CountName, Barcode, Qty) VALUES('" + CountDetail.Name + "','" + barcode + "','" + Qty + "')";
+                                dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
+                                dbase.slCommand.ExecuteNonQuery();
+                                dbase.CloseslConnection();
+                                IsExist = true;
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Barkod bulunamadı", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        }
+
+                        if (!IsExist)
+                        {
+                            MessageBox.Show("Barkod bulunamadı", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            dataGridViewBarcodes.Rows.RemoveAt(dataGridViewBarcodes.Rows.Count - 2);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ayar dosyası bozuk", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch (Exception)
                 {
-
                     MessageBox.Show("Ayar dosyası bozuk", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                if (dbase.msConnection.State.ToString() == "Open")
+                finally
                 {
-                    bool IsExist = false;
-                    dbase.msQueryText = "SELECT * FROM prItemBarcode WHERE Barcode = @Barcode";
-                    dbase.msCommand = new SqlCommand(dbase.msQueryText, dbase.msConnection);
-                    dbase.msCommand.Parameters.Add("@Barcode", SqlDbType.VarChar);
-                    dbase.msCommand.Parameters["@Barcode"].Value = textBoxBarcode.Text.ToString();
-                    dbase.msDataReader = dbase.msCommand.ExecuteReader();
-                    while (dbase.msDataReader.Read())
-                    {
-                        try
-                        {
-                            dbase.OpenslConnection();
-                            dbase.slQueryText = "INSERT INTO prCount (CountName, Barcode, Qty) VALUES('" + CountDetail.Name + "','" + barcode + "','" + Qty + "')";
-                            dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
-                            dbase.slCommand.ExecuteNonQuery();
-                            dbase.CloseslConnection();
-                            IsExist = true;
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Barkod bulunamadı", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-
-                    if (!IsExist)
-                    {
-                        MessageBox.Show("Barkod bulunamadı", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        dataGridViewBarcodes.Rows.RemoveAt(dataGridViewBarcodes.Rows.Count - 2);
-                    }
-
-                    
+                     dbase.ClosemsConnection();
                 }
-                else
-                {
-                    MessageBox.Show("Ayar dosyası bozuk", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                dbase.ClosemsConnection();
             }
             else
             {
-                dbase.OpenslConnection();
-                dbase.slQueryText = "INSERT INTO prCount (CountName, Barcode, Qty) VALUES('" + CountDetail.Name + "','" + barcode + "','" + Qty + "')";
-                dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
-                dbase.slCommand.ExecuteNonQuery();
-                dbase.CloseslConnection();
+                try
+                {
+                    dbase.OpenslConnection();
+                    dbase.slQueryText = "INSERT INTO prCount (CountName, Barcode, Qty) VALUES('" + CountDetail.Name + "','" + barcode + "','" + Qty + "')";
+                    dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
+                    dbase.slCommand.ExecuteNonQuery();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Yeni sayım eklenemedi", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    dbase.CloseslConnection();
+                }
             }
 
         }   // New line
+
         #endregion
 
         #region Controls
@@ -103,7 +112,7 @@ namespace Count
             {
                 e.Handled = true;
             }
-        }
+        }   // Control Qty Textbox
 
         private void checkBoxIsWithQty_CheckedChanged(object sender, EventArgs e)
         {
@@ -117,10 +126,12 @@ namespace Count
                 textBoxQty.Enabled = false;
             }
 
-        }
+        }   // Control IsWithQty
+
         #endregion
 
-        #region Form Elemetns
+        #region Form Elements
+
         private void Counter_Load(object sender, EventArgs e)
         {
             checkBoxIsWithQty.Checked = false;
@@ -132,22 +143,34 @@ namespace Count
             {
                 labelTitle.Text = "Offline : " + CountDetail.Name;
             }
-            
+
             if (CountDetail.IsNew)
             {
 
             }
             else
             {
-                dbase.OpenslConnection();
-                dbase.slQueryText = "SELECT Barcode, Qty FROM prCount WHERE CountName = '" + CountDetail.Name + "'";
-                dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
-                dbase.slDataReader = dbase.slCommand.ExecuteReader();
-                while (dbase.slDataReader.Read())
+                try
                 {
-                    dataGridViewBarcodes.Rows.Add(dbase.slDataReader["Barcode"].ToString(), dbase.slDataReader["Qty"].ToString());
+                    dbase.OpenslConnection();
+                    dbase.slQueryText = "SELECT Barcode, Qty FROM prCount WHERE CountName = '" + CountDetail.Name + "'";
+                    dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
+                    dbase.slDataReader = dbase.slCommand.ExecuteReader();
+                    while (dbase.slDataReader.Read())
+                    {
+                        dataGridViewBarcodes.Rows.Add(dbase.slDataReader["Barcode"].ToString(), dbase.slDataReader["Qty"].ToString());
+                    }
                 }
-                dbase.CloseslConnection();
+                catch (Exception)
+                {
+                    MessageBox.Show("Eski sayımlar yüklenemedi", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    dbase.CloseslConnection();
+                }
+
+                
             }
         }
         private void buttonSave_Click(object sender, EventArgs e)
@@ -175,13 +198,13 @@ namespace Count
                     {
                         dataGridViewBarcodes.Rows.Add(textBoxBarcode.Text.ToString(), "1");
                         AddNewLine(textBoxBarcode.Text.ToString(), 1);
-                        
+
                     }
                     else
                     {
                         dataGridViewBarcodes.Rows.Add(textBoxBarcode.Text.ToString(), textBoxQty.Text.ToString());
                         AddNewLine(textBoxBarcode.Text.ToString(), int.Parse(textBoxQty.Text.ToString()));
-                       
+
                     }
 
                 }
@@ -189,7 +212,7 @@ namespace Count
                 {
                     dataGridViewBarcodes.Rows.Add(textBoxBarcode.Text.ToString(), "1");
                     AddNewLine(textBoxBarcode.Text.ToString(), 1);
-                    
+
                 }
                 textBoxBarcode.Clear();
                 textBoxBarcode.Focus();
