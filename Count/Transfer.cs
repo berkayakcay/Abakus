@@ -50,37 +50,58 @@ namespace Count
 
         public void PreviousCounts()
         {
-            dbase.OpenslConnection();
-            dbase.slQueryText = "SELECT Name FROM cdCount ORDER BY Date DESC";
-            dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
-            dbase.slDataReader = dbase.slCommand.ExecuteReader();
-            while (dbase.slDataReader.Read())
+            try
             {
-                comboBoxCounts.Items.Add(dbase.slDataReader[0]);
+                dbase.OpenslConnection();
+                dbase.slQueryText = "SELECT Name FROM cdCount ORDER BY Date DESC";
+                dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
+                dbase.slDataReader = dbase.slCommand.ExecuteReader();
+                while (dbase.slDataReader.Read())
+                {
+                    comboBoxCounts.Items.Add(dbase.slDataReader[0]);
+                }
+                dbase.CloseslConnection();
             }
-            dbase.CloseslConnection();
-        }   // Populate Grid
+            catch (Exception)
+            {
+                MessageBox.Show("Bir hata oluştu!", "Hata - PreviousCounts", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
-        
+        }   // Populate Grid
+      
         private void WareHouseCodes()
         {
-            dbase.OpenmsConnection();
-            dbase.msQueryText = "SELECT WarehouseCode, WarehouseDescription FROM cdWareHouseDesc";
-            dbase.msCommand = new SqlCommand(dbase.msQueryText, dbase.msConnection);
-            dbase.msDataReader = dbase.msCommand.ExecuteReader();
-
-            comboBoxWareHouse.DisplayMember = "Text";
-            comboBoxWareHouse.ValueMember = "Value";
-
-            while (dbase.msDataReader.Read())
+            try
             {
-                comboBoxWareHouse.Items.Add(new { Text = dbase.msDataReader["WarehouseDescription"].ToString(), Value = dbase.msDataReader["WarehouseCode"].ToString() });
+                dbase.OpenmsConnection();
+                dbase.msQueryText = "SELECT WarehouseCode, WarehouseDescription FROM cdWareHouseDesc";
+                dbase.msCommand = new SqlCommand(dbase.msQueryText, dbase.msConnection);
+                dbase.msDataReader = dbase.msCommand.ExecuteReader();
+
+                comboBoxWareHouse.DisplayMember = "Text";
+                comboBoxWareHouse.ValueMember = "Value";
+                if (dbase.msDataReader.HasRows)
+                {
+                    while (dbase.msDataReader.Read())
+                    {
+                        comboBoxWareHouse.Items.Add(new { Text = dbase.msDataReader["WarehouseDescription"].ToString(), Value = dbase.msDataReader["WarehouseCode"].ToString() });
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Depo bulunamadı", "Hata - WareHouseCode", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                dbase.ClosemsConnection();
             }
-            dbase.ClosemsConnection();
+            catch (Exception)
+            {
+                MessageBox.Show("Bir hata oluştu!", "Hata - WareHouseCodes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
 
         }   // Populate WareHouse Codes
 
-        public string FixType()
+        public string FixSpecialCharacter()
         {
             string SpecialChar;
             if (checkBoxSpecialChar.Checked == true)
@@ -109,6 +130,15 @@ namespace Count
 
         public void OfflineTransfer()
         {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             dbase.OpenslConnection();
             dbase.slQueryText = "SELECT Barcode, Qty FROM prCount WHERE CountName = '" + comboBoxCounts.Text.ToString() + "'";
             dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
@@ -118,7 +148,7 @@ namespace Count
 
             while (dbase.slDataReader.Read())
             {
-                TransferList.Add(dbase.slDataReader["Barcode"].ToString() + FixType() + dbase.slDataReader["Qty"].ToString());
+                TransferList.Add(dbase.slDataReader["Barcode"].ToString() + FixSpecialCharacter() + dbase.slDataReader["Qty"].ToString());
             }
             dbase.CloseslConnection();
             WriteTextFile.RW(TransferList, comboBoxCounts.Text.ToString());
