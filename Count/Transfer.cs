@@ -195,15 +195,30 @@ namespace Count
                 dbase.msCommand.Connection = dbase.msConnection;
                 dbase.msCommand.CommandType = CommandType.StoredProcedure;
                 dbase.msCommand.CommandText = "ct_ImportCount";
-                dbase.msCommand.Parameters.Add("@EnvanterTarihi", SqlDbType.Date);
-                dbase.msCommand.Parameters["@EnvanterTarihi"].Value = DateTime.Now.Date;
+                dbase.msCommand.Parameters.Add("@InventoryDate", SqlDbType.Date);
+                dbase.msCommand.Parameters["@InventoryDate"].Value = DateTime.Now.Date;
                 dbase.msCommand.ExecuteNonQuery();
 
                 MessageBox.Show("Sayım fişi programa aktarıldı", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
+
                 dbase.msCommand.CommandType = CommandType.Text;
-                dbase.msCommand.CommandText = "DELETE FROM [dbo].[xtrCount] WHERE Item IS NOT NULL";
+                dbase.msCommand.CommandText = "SELECT Barkod FROM [dbo].[xtrCount] WHERE UrunKodu = ''";
+
+                using (dbase.msDataReader = dbase.msCommand.ExecuteReader())
+                {
+                    List<string> UndefinedBarcodes = new List<string>();
+                    while (dbase.msDataReader.Read())
+                    {
+                        UndefinedBarcodes.Add(dbase.msDataReader["Barkod"].ToString());
+                    }
+                    WriteTextFile.RW(UndefinedBarcodes, "TANIMSIZ_BARKODLAR");
+                    MessageBox.Show("Sayıma eklenemeyen barkodlar 'TANIMSIZ BARKODLAR' isimli text dosyasına kaydedildi.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                dbase.msCommand.CommandText = "DELETE FROM [dbo].[xtrCount]";
                 dbase.msCommand.ExecuteNonQuery();
+
                 dbase.ClosemsConnection();
                 dbase.CloseslConnection();
             }
@@ -219,13 +234,9 @@ namespace Count
                 }
                 MessageBox.Show(errorMessages.ToString(), "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
         }   // Online transfer operations
 
         #endregion
-
-
 
         #region Form Elements   ---   All form elements inside
 
