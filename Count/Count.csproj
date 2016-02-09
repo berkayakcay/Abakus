@@ -105,6 +105,9 @@
       <DependentUpon>Transfer.cs</DependentUpon>
     </Compile>
     <Compile Include="WriteTextFile.cs" />
+    <Content Include="_sp\Count.txt" />
+    <Content Include="_sp\ct_ImportCount.sql" />
+    <Content Include="_sp\xtrCount.sql" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>

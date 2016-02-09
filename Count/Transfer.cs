@@ -178,7 +178,7 @@ namespace Count
                     {
                         SqlConnection cnn = new SqlConnection(dbase.Msconnectionstring.ToString());
                         cnn.Open();
-                        string insert = string.Concat("INSERT INTO [dbo].[xlDepoEnvanteri] ([DepoKodu] ,[Barkod],[UrunKodu],[Renk],[Boyut1],[Boyut2],[Boyut3],[Miktar]) VALUES ('", comboBoxWareHouse.Text.ToString(), "' , '", dbase.msDataReader["Barcode"].ToString(), "','", dbase.msDataReader["ItemCode"].ToString(), "','", dbase.msDataReader["ColorCode"].ToString(), "','", dbase.msDataReader["ItemDim1Code"].ToString(), "','", dbase.msDataReader["ItemDim2Code"].ToString(), "','", dbase.msDataReader["ItemDim3Code"].ToString(), "','", dbase.slDataReader["Qty"].ToString(), "')");
+                        string insert = string.Concat("INSERT INTO [dbo].[xtrCount] ([DepoKodu] ,[Barkod],[UrunKodu],[Renk],[Boyut1],[Boyut2],[Boyut3],[Miktar]) VALUES ('", comboBoxWareHouse.Text.ToString(), "' , '", dbase.msDataReader["Barcode"].ToString(), "','", dbase.msDataReader["ItemCode"].ToString(), "','", dbase.msDataReader["ColorCode"].ToString(), "','", dbase.msDataReader["ItemDim1Code"].ToString(), "','", dbase.msDataReader["ItemDim2Code"].ToString(), "','", dbase.msDataReader["ItemDim3Code"].ToString(), "','", dbase.slDataReader["Qty"].ToString(), "')");
                         SqlCommand cmd = new SqlCommand(insert, cnn);
                         cmd.ExecuteNonQuery();
                         cnn.Close();
@@ -194,7 +194,7 @@ namespace Count
                 dbase.msCommand.Parameters.Clear();
                 dbase.msCommand.Connection = dbase.msConnection;
                 dbase.msCommand.CommandType = CommandType.StoredProcedure;
-                dbase.msCommand.CommandText = "sp_ImportDepoEnvanteri";
+                dbase.msCommand.CommandText = "ct_ImportCount";
                 dbase.msCommand.Parameters.Add("@EnvanterTarihi", SqlDbType.Date);
                 dbase.msCommand.Parameters["@EnvanterTarihi"].Value = DateTime.Now.Date;
                 dbase.msCommand.ExecuteNonQuery();
@@ -202,7 +202,7 @@ namespace Count
                 MessageBox.Show("Sayım fişi programa aktarıldı", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
                 dbase.msCommand.CommandType = CommandType.Text;
-                dbase.msCommand.CommandText = "DELETE FROM [dbo].[xlDepoEnvanteri] WHERE HeaderID IS NOT NULL";
+                dbase.msCommand.CommandText = "DELETE FROM [dbo].[xtrCount] WHERE Item IS NOT NULL";
                 dbase.msCommand.ExecuteNonQuery();
                 dbase.ClosemsConnection();
                 dbase.CloseslConnection();
