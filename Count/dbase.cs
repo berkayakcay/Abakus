@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using System.Text;
-using System.Data.SQLite;
 using System.Data.SqlClient;
-using System.Data.Sql;
-using System.Data;
-using System.Windows.Forms;
+using System.Data.SQLite;
+
 
 namespace Count
 {
@@ -27,10 +22,6 @@ namespace Count
         public static SqlDataAdapter msDataAdapter;
         public static SqlDataReader msDataReader;
 
-
-        public static DataTable DataTable;
-        public static DataSet DataSet;
-
         public static string ServerName;
         public static string DataBase;
         public static string User;
@@ -41,29 +32,29 @@ namespace Count
         {
             get
             {
-
+                try
+                {
                     if (System.IO.File.Exists(@"Settings.txt"))
                     {
-                        try
-                        {
-                            string[] lines = System.IO.File.ReadAllLines(@"Settings.txt");
-                            dbase.ServerName = lines[0];
-                            dbase.DataBase = lines[1];
-                            dbase.User = lines[2];
-                            dbase.Password = lines[3];
-                            dbase.Program = lines[4];
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Ayar dosyası bozuk!");
-                        }
-
+                        string[] lines = System.IO.File.ReadAllLines(@"Settings.txt");
+                        dbase.ServerName = lines[0];
+                        dbase.DataBase = lines[1];
+                        dbase.User = lines[2];
+                        dbase.Password = lines[3];
+                        dbase.Program = lines[4];
                     }
-
-
+                    else
+                    {
+                        throw new System.InvalidOperationException("file not found!"); 
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
                 return "Server=" + ServerName + ";Database=" + DataBase + ";User Id=" + User + ";Password=" + Password + "; MultipleActiveResultSets=True;";
-            }
 
+            }
             set
             {
                 _msconnectionstring = value;
@@ -79,14 +70,14 @@ namespace Count
             try
             {
                 if (slConnection == null || slConnection.State.ToString() == "Closed")
-                { 
+                {
                     slConnection = new SQLiteConnection(slconnectionstring);
                     slConnection.Open();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }   // OPEN SQLite
 
@@ -99,9 +90,9 @@ namespace Count
                     slConnection.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }   // CLOSE SQLite
 
@@ -115,12 +106,12 @@ namespace Count
                     msConnection.Open();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                throw ex;
             }
 
-        }   // OPEN SQLite
+        }   // OPEN MSSQL
 
         public static void ClosemsConnection()
         {
@@ -131,11 +122,11 @@ namespace Count
                     msConnection.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
-        }   // CLOSE SQLite
+        }   // CLOSE MSSQL
         #endregion
 
     }

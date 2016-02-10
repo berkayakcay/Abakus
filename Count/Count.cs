@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Count
+﻿namespace Count
 {
     public class Count
     {

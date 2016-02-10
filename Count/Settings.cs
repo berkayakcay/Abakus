@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-
-using System.Text;
-using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Data.SQLite;
-using System.Data.Sql;
+using System.Windows.Forms;
 
 namespace Count
 {
@@ -36,19 +28,21 @@ namespace Count
             {
                 try
                 {
-                    dbase.ServerName = textBoxServer.Text.ToString();
-                    dbase.DataBase = textBoxDataBase.Text.ToString();
-                    dbase.User = textBoxUser.Text.ToString();
-                    dbase.Password = textBoxPassword.Text.ToString();
-                    dbase.Program = comboBoxProgram.SelectedText.ToString();
-                    dbase.OpenmsConnection();
-                    MessageBox.Show("Ayar dosyası hatasız", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    dbase.ClosemsConnection();
+                    dbase.msConnection = new SqlConnection("Server=" + textBoxServer.Text.ToString() + ";Database=" + textBoxDataBase.Text.ToString() + ";User Id=" + textBoxUser.Text.ToString() + ";Password=" + textBoxPassword.Text.ToString() + "; MultipleActiveResultSets=True;");
+                    dbase.msConnection.Open();
+                    if (dbase.msConnection.State.ToString() == "Open")
+                    {
+                        MessageBox.Show("Test sorunsuz bir şekilde gerçekleştirildi", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        dbase.ClosemsConnection();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Belirtilen parametreler hatalı", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Ayar dosyası bozuk", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    dbase.ClosemsConnection();
+                    MessageBox.Show("Belirtilen parametreler hatalı", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -60,7 +54,15 @@ namespace Count
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            System.IO.File.WriteAllText(@"Settings.txt", textBoxServer.Text.ToString() + Environment.NewLine + textBoxDataBase.Text.ToString() + Environment.NewLine + textBoxUser.Text.ToString() + Environment.NewLine + textBoxPassword.Text.ToString() + Environment.NewLine + comboBoxProgram.Text.ToString());
+            try
+            {
+                System.IO.File.WriteAllText(@"Settings.txt", textBoxServer.Text.ToString() + Environment.NewLine + textBoxDataBase.Text.ToString() + Environment.NewLine + textBoxUser.Text.ToString() + Environment.NewLine + textBoxPassword.Text.ToString() + Environment.NewLine + comboBoxProgram.Text.ToString());
+                MessageBox.Show("Ayarlar başarılı bir şekilde kaydedildi.", "Başarılı", MessageBoxButtons.OK , MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Belirtilern parametreler hatalı", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void Settings_Load(object sender, EventArgs e)

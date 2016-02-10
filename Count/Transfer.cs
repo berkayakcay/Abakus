@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-
+using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.SQLite;
-using System.Data.SqlClient;
 
 namespace Count
 {
@@ -100,18 +97,8 @@ namespace Count
 
         }   // Populate WareHouse Codes
 
-        public string FixSpecialCharacter()
+        public string FixSpecialCharacter(string SpecialChar)
         {
-            string SpecialChar;
-            if (checkBoxSpecialChar.Checked == true)
-            {
-                SpecialChar = textBoxSpecialChar.Text.ToString();
-            }
-            else
-            {
-                SpecialChar = checkBoxSpecialChar.Text.ToString();
-            }
-
             switch (SpecialChar)
             {
                 case "TAB":
@@ -127,36 +114,33 @@ namespace Count
             }
         }   // Fix types string
 
-        public void OfflineTransfer()
+        public void OfflineTransfer(string Char)
         {
             try
             {
+                dbase.OpenslConnection();
+                dbase.slQueryText = "SELECT Barcode, Qty FROM prCount WHERE CountName = '" + comboBoxCounts.Text.ToString() + "'";
+                dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
+                dbase.slDataReader = dbase.slCommand.ExecuteReader();
 
+                List<string> TransferList = new List<string>();
+
+                while (dbase.slDataReader.Read())
+                {
+                    TransferList.Add(dbase.slDataReader["Barcode"].ToString() + FixSpecialCharacter(Char) + dbase.slDataReader["Qty"].ToString());
+                }
+                dbase.CloseslConnection();
+                WriteTextFile.RW(TransferList, comboBoxCounts.Text.ToString());
+                MessageBox.Show(comboBoxCounts.Text.ToString() + " isimli dosya aktarıldı.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                MessageBox.Show("Aktarım sırasında hata ile karşılarışdı" + Environment.NewLine + ex, "Hata", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
-            dbase.OpenslConnection();
-            dbase.slQueryText = "SELECT Barcode, Qty FROM prCount WHERE CountName = '" + comboBoxCounts.Text.ToString() + "'";
-            dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
-            dbase.slDataReader = dbase.slCommand.ExecuteReader();
-
-            List<string> TransferList = new List<string>();
-
-            while (dbase.slDataReader.Read())
-            {
-                TransferList.Add(dbase.slDataReader["Barcode"].ToString() + FixSpecialCharacter() + dbase.slDataReader["Qty"].ToString());
-            }
-            dbase.CloseslConnection();
-            WriteTextFile.RW(TransferList, comboBoxCounts.Text.ToString());
-            MessageBox.Show(comboBoxCounts.Text.ToString() + " isimli dosya aktarıldı.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }   // Offline transfer operations
 
         public void OnlineTransfer()
         {
-
             dbase.OpenslConnection();
             dbase.slQueryText = "SELECT Barcode, Qty FROM prCount WHERE CountName = '" + comboBoxCounts.Text.ToString() + "'";
             dbase.slCommand = new SQLiteCommand(dbase.slQueryText, dbase.slConnection);
@@ -167,7 +151,6 @@ namespace Count
             dbase.msQueryText = "SELECT Barcode,ItemCode,ColorCode,ItemDim1Code,ItemDim2Code,ItemDim3Code FROM prItemBarcode WHERE Barcode = @Barcode";
             dbase.msCommand = new SqlCommand(dbase.msQueryText, dbase.msConnection);
             dbase.msCommand.Parameters.Add("@Barcode", SqlDbType.VarChar);
-
 
             while (dbase.slDataReader.Read())
             {
@@ -184,7 +167,6 @@ namespace Count
                         cnn.Close();
                     }
                 }
-
             }
             dbase.ClosemsConnection();
             StringBuilder errorMessages = new StringBuilder();
@@ -200,7 +182,6 @@ namespace Count
                 dbase.msCommand.ExecuteNonQuery();
 
                 MessageBox.Show("Sayım fişi programa aktarıldı", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-
 
                 dbase.msCommand.CommandType = CommandType.Text;
                 dbase.msCommand.CommandText = "SELECT Barkod FROM [dbo].[xtrCount] WHERE UrunKodu = ''";
@@ -254,22 +235,22 @@ namespace Count
                     {
                         if (textBoxSpecialChar.Text == "")
                         {
-                            MessageBox.Show("Ayırıcı karakter seçiniz", "Dikkat", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Ayırıcı karakter seçiniz", "Dikkat", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         else
                         {
-                            OfflineTransfer();
+                            OfflineTransfer(textBoxSpecialChar.Text.ToString());
                         }
                     }
                     else
                     {
                         if (comboBoxCharacter.Text == "")
                         {
-                            MessageBox.Show("Ayırıcı karakter seçiniz", "Dikkat", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Ayırıcı karakter seçiniz", "Dikkat", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         else
                         {
-                            OfflineTransfer();
+                            OfflineTransfer(comboBoxCharacter.Text.ToString());
                         }
                     }
                 }
