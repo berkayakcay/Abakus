@@ -1,16 +1,13 @@
 USE [DATAG]
 GO
 
-/****** Object:  StoredProcedure [dbo].[ct_ImportCount]    Script Date: 9.02.2016 22:29:28 ******/
-DROP PROCEDURE [dbo].[ct_ImportCount]
-GO
-
-/****** Object:  StoredProcedure [dbo].[ct_ImportCount]    Script Date: 9.02.2016 22:29:28 ******/
+/****** Object:  StoredProcedure [dbo].[ct_ImportCount]    Script Date: 14.02.2016 12:07:59 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -134,6 +131,7 @@ AS
 	END CATCH
 	
 	
+
 
 
 

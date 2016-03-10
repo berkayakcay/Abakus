@@ -1,4 +1,7 @@
-/****** Object:  Table [dbo].[xtrCount]    Script Date: 9.02.2016 22:30:27 ******/
+USE [DATAG]
+GO
+
+/****** Object:  Table [dbo].[xtrCount]    Script Date: 14.02.2016 12:07:11 ******/
 SET ANSI_NULLS ON
 GO
 

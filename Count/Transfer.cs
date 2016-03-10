@@ -5,6 +5,9 @@ using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Text;
 using System.Windows.Forms;
+using Count.Manager;
+using Count.Model;
+
 
 namespace Count
 {
@@ -68,6 +71,7 @@ namespace Count
 
         private void WareHouseCodes()
         {
+            #region OLD
             try
             {
                 dbase.OpenmsConnection();
@@ -93,6 +97,8 @@ namespace Count
             {
                 MessageBox.Show("Bir hata oluştu!", "Hata - WareHouseCodes", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            #endregion
+
 
 
         }   // Populate WareHouse Codes

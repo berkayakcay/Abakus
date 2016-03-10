@@ -232,11 +232,11 @@
             this.labelUser.TabIndex = 5;
             this.labelUser.Text = "Kullanıcı : ";
             // 
-            // textBoxDataBase
+            // textBoxDatabase
             // 
             this.textBoxDataBase.Enabled = false;
             this.textBoxDataBase.Location = new System.Drawing.Point(76, 39);
-            this.textBoxDataBase.Name = "textBoxDataBase";
+            this.textBoxDataBase.Name = "textBoxDatabase";
             this.textBoxDataBase.Size = new System.Drawing.Size(148, 20);
             this.textBoxDataBase.TabIndex = 10;
             // 

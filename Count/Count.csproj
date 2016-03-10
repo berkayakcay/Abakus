@@ -84,6 +84,16 @@
     <Compile Include="Counter.Designer.cs">
       <DependentUpon>Counter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Manager\ConfigurationManager.cs" />
+    <Compile Include="Manager\ConnectionManager.cs" />
+    <Compile Include="Manager\LocalDataConnectionManager.cs" />
+    <Compile Include="Manager\LocalDataManager.cs" />
+    <Compile Include="Model\ActiveProgram.cs" />
+    <Compile Include="Model\Configuration.cs" />
+    <Compile Include="Model\Count.cs" />
+    <Compile Include="Model\CountDetail.cs" />
+    <Compile Include="Model\LocalData.cs" />
+    <Compile Include="Model\Warehouse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Previous.cs">
