@@ -52,7 +52,7 @@ namespace Count.Manager
                     MessageBox.Show(string.Format("Yerel Veri Tabanı Hatası \n Hata : {0}", ex.Message));
                 }
             }
-            return LocalData;
+            return null;
 
         }
 

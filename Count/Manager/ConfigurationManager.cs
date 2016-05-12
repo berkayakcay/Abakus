@@ -33,6 +33,7 @@ namespace Count.Manager
 
         private string configurationFilePath;
 
+        
         private ConfigurationManager()
         {
             configurationFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Configuration.xml");
